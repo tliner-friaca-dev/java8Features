@@ -20,6 +20,8 @@ class LambdaTest {
 
 	// Interface Funcional
 
+	private static final int QUANTIDADE_DE_NUMEROS_PARES = 5;
+
 	@Test
 	void enviadorEmail_enviaEmailEAtualizaFlagEmailAniversarioEnviadoParaTrue_quandoSucesso() {
 
@@ -68,7 +70,7 @@ class LambdaTest {
 					.filter(n -> n % 2 == 0)
 					.collect(Collectors.toList());
 
-		assertEquals(5, numeros.size());
+		assertEquals(QUANTIDADE_DE_NUMEROS_PARES, numeros.size());
 
 	}
 
