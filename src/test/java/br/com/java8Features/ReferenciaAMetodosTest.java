@@ -17,6 +17,7 @@ import br.com.java8Features.model.Cliente;
 @SpringBootTest
 class ReferenciaAMetodosTest {
 
+	private static final String NUMEROS_CONVERTIDOS_E_MULTIPLICADOS = "[2, 4, 6]";
 	private static final String TIPO_DA_VARIAVEL_BIG_DECIMAL = "class java.math.BigDecimal";
 	private static final int QUANTIDADE_DE_CLIENTES_COM_DATA_DE_NASCIMENTO_NULO = 2;
 
@@ -74,6 +75,28 @@ class ReferenciaAMetodosTest {
 												.collect(Collectors.toList());
 
 		numerosConvertidos.forEach(n -> assertEquals(TIPO_DA_VARIAVEL_BIG_DECIMAL, n.getClass().toString()));
+
+	}
+
+			
+	@Test
+	void transformarNumerosInteirosEmBigDecimalEMultiplicarPor2_referenciaAMetodoDeUmaInstancia_quandoSucesso() {
+
+		// 1 * 2 = 2
+		// 2 * 2 = 4
+		// 3 * 2 = 6
+
+		List<Integer> numeros = Arrays.asList(1, 2, 3);
+
+		BigDecimal dois = new BigDecimal(2) ;
+
+		List<BigDecimal> numerosConvertidos = numeros.stream()
+												.map(BigDecimal::new)
+												.map(dois::multiply)
+												.collect(Collectors.toList());
+
+		
+		assertEquals(NUMEROS_CONVERTIDOS_E_MULTIPLICADOS, numerosConvertidos.toString());
 
 	}
 
