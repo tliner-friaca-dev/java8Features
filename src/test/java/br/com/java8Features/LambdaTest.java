@@ -18,8 +18,6 @@ import br.com.java8Features.util.EnviadorEmail;
 @SpringBootTest
 class LambdaTest {
 
-	// Interface Funcional
-
 	private static final int QUANTIDADE_DE_NUMEROS_PARES = 5;
 
 	@Test

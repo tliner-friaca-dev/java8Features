@@ -21,6 +21,7 @@ class ReferenciaAMetodosTest {
 	private static final String TIPO_DA_VARIAVEL_BIG_DECIMAL = "class java.math.BigDecimal";
 	private static final int QUANTIDADE_DE_CLIENTES_COM_DATA_DE_NASCIMENTO_NULO = 2;
 
+	// Referência a método estático
 	@Test
 	void exibirQuantidadeDeClientesComDataDeNascimentoNulo_referenciaAMetodoEstatico_retornar2Objetos_quandoSucesso() {
 
@@ -65,6 +66,7 @@ class ReferenciaAMetodosTest {
 
 	}
 			
+	// Referência a método Construtor
 	@Test
 	void transformarNumerosInteirosEmBigDecimal_referenciaAMetodoConstrutor_quandoSucesso() {
 
@@ -77,8 +79,8 @@ class ReferenciaAMetodosTest {
 		numerosConvertidos.forEach(n -> assertEquals(TIPO_DA_VARIAVEL_BIG_DECIMAL, n.getClass().toString()));
 
 	}
-
 			
+	// Referência a método de uma instância
 	@Test
 	void transformarNumerosInteirosEmBigDecimalEMultiplicarPor2_referenciaAMetodoDeUmaInstancia_quandoSucesso() {
 
@@ -94,7 +96,6 @@ class ReferenciaAMetodosTest {
 												.map(BigDecimal::new)
 												.map(dois::multiply)
 												.collect(Collectors.toList());
-
 		
 		assertEquals(NUMEROS_CONVERTIDOS_E_MULTIPLICADOS, numerosConvertidos.toString());
 
