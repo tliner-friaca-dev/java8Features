@@ -54,5 +54,5 @@ class InterfaceFuncionalTest {
 									() -> assertEquals(VALOR_BOLETO, boleto.getValor().toString()));
 
 	}
-
+	
 }
