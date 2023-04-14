@@ -10,12 +10,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import br.com.java8Features.model.Cliente;
 import br.com.java8Features.util.EnviadorEmail;
 
-@SpringBootTest
 class LambdaTest {
 
 	private static final int QUANTIDADE_DE_NUMEROS_PARES = 5;

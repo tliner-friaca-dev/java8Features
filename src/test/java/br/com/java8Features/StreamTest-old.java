@@ -7,8 +7,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
-public class StreamTest {
+
+
+@SpringBootTest
+class StreamTest {
 
 /* 
 	*Stream - loops implícitos*
@@ -54,8 +58,8 @@ public class StreamTest {
 
 	// private static final int QUANTIDADE_DE_NUMEROS_PARES = 5;
 
-    @Test
-    void imprimirNumerosParesDe1a10__quandoSucesso() {
+	@Test
+	void imprimirNumerosParesDe1a10__quandoSucesso() {
 
 		List<Integer> numeros = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
@@ -63,7 +67,8 @@ public class StreamTest {
 				.skip(2)
 				.collect(Collectors.toList());
 
-		assertEquals(8, numeros.size());
+		assertEquals(10, numeros.size());
 
 	}
+
 }

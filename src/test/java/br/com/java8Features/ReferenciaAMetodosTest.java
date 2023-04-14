@@ -10,11 +10,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import br.com.java8Features.model.Cliente;
 
-@SpringBootTest
 class ReferenciaAMetodosTest {
 
 	private static final String NUMEROS_CONVERTIDOS_E_MULTIPLICADOS = "[2, 4, 6]";
