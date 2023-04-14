@@ -55,7 +55,7 @@ public class StreamTest {
 	// private static final int QUANTIDADE_DE_NUMEROS_PARES = 5;
 
     @Test
-    void imprimirNumerosParesDe1a10__quandoSucesso() {
+	void skip_ignoraOs2PrimeirosElementos_retorna8Elementos_quandoSucesso() {
 
 		List<Integer> numeros = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 

@@ -6,12 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.math.BigDecimal;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import br.com.java8Features.Boleto.BoletoImprimir;
 import br.com.java8Features.model.Boleto;
 
-@SpringBootTest
 class InterfaceFuncionalTest {
 
 	// Supplier = Representa um fornecedor de resultados.
