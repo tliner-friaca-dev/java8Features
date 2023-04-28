@@ -57,19 +57,6 @@ public class Cliente {
         this.nome = nome;
     }
 
-    public boolean isemailAniversarioEnviado() {
-        return this.emailAniversarioEnviado;
-    }
-
-    public boolean getemailAniversarioEnviado() {
-        return this.emailAniversarioEnviado;
-    }
-
-    public void setemailAniversarioEnviado(boolean emailAniversarioEnviado) {
-        this.emailAniversarioEnviado = emailAniversarioEnviado;
-    }
-
-
     public boolean isEmailAniversarioEnviado() {
         return this.emailAniversarioEnviado;
     }

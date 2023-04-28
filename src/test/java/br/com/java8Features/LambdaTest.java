@@ -53,7 +53,7 @@ class LambdaTest {
 			c.setEmailAniversarioEnviado(Boolean.TRUE);
 		});
 
-		clientes.forEach(c -> assertTrue(c.getemailAniversarioEnviado()));
+		clientes.forEach(c -> assertTrue(c.getEmailAniversarioEnviado()));
 
 	}
 

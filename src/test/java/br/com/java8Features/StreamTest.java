@@ -2,16 +2,27 @@ package br.com.java8Features;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDate;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Deque;
+import java.util.HashSet;
+import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import br.com.java8Features.model.Cliente;
+import br.com.java8Features.util.EnviadorEmail;
 
 public class StreamTest {
 
@@ -51,6 +62,15 @@ public class StreamTest {
 	- toList - armazena o resultado em um list.
 	- toSet - armazena o resultado em um set.
 	- toCollection - passa a implementação da collection.
+	- joining - agrupa os elementos de uma lista em uma string
+	- counting - contar o número de elementos
+	- maxBy - maior elemento obedecendo um critério
+	- minBy - menor elemento obedecendo um critério
+ */
+/* 
+	- averaging - retorna a média de todos os valores
+	- summing - retorna a soma de todos os valores
+	- summarizing - retorna uma sumarização de todos os valores
  */
 /* 
 	Stream
@@ -68,8 +88,8 @@ public class StreamTest {
 	void skip_ignoraOs2PrimeirosElementos_retorna8Elementos_quandoSucesso() {
 
 		numeros = numeros.stream()
-				.skip(3)
-				.collect(Collectors.toList());
+							.skip(3)
+							.collect(Collectors.toList());
 
 		assertEquals(9, numeros.size());
 	}
@@ -78,8 +98,8 @@ public class StreamTest {
 	void limit_limitaONumeroDeElementosASeremProcessados_retorna4Elementos_quandoSucesso() {
 
 		numeros = numeros.stream()
-				.limit(4)
-				.collect(Collectors.toList());
+							.limit(4)
+							.collect(Collectors.toList());
 
 		assertEquals(4, numeros.size());
 	}
@@ -88,8 +108,8 @@ public class StreamTest {
 	void distinct_NaoProcessaElementosRepetidos_retorna10Elementos_quandoSucesso() {
 
 		numeros = numeros.stream()
-				.distinct()
-				.collect(Collectors.toList());
+							.distinct()
+							.collect(Collectors.toList());
 
 		assertEquals(10, numeros.size());
 	}
@@ -98,8 +118,8 @@ public class StreamTest {
 	void filter_implementaUmFiltro_retorna6NumerosPares_quandoSucesso() {
 
 		numeros = numeros.stream()
-				.filter(e -> e % 2 == 0)
-				.collect(Collectors.toList());
+							.filter(e -> e % 2 == 0)
+							.collect(Collectors.toList());
 
 		assertEquals(6, numeros.size());
 	}
@@ -108,9 +128,9 @@ public class StreamTest {
 	void map_promoveUmaTransformacaoNoDados_retorna12NumerosPares_quandoSucesso() {
 
 		numeros = numeros.stream()
-				.map(e -> e * 2)
-				.filter(e -> e % 2 == 0)
-				.collect(Collectors.toList());
+							.map(e -> e * 2)
+							.filter(e -> e % 2 == 0)
+							.collect(Collectors.toList());
 
 		assertEquals(12, numeros.size());
 	}
@@ -129,7 +149,7 @@ public class StreamTest {
 	void min_selecionaOMenorValor_retornaONumero1_quandoSucesso() {
 
 		Optional<Integer> resultado = numeros.stream()
-								.min(Comparator.naturalOrder());
+												.min(Comparator.naturalOrder());
 
 		assertEquals(1, resultado.get());
 	}
@@ -138,7 +158,7 @@ public class StreamTest {
 	void max_selecionaOMaiorValor_retornaONumero10_quandoSucesso() {
 
 		Optional<Integer> resultado = numeros.stream()
-								.max(Comparator.naturalOrder());
+												.max(Comparator.naturalOrder());
 
 		assertEquals(10, resultado.get());
 	}
@@ -147,8 +167,8 @@ public class StreamTest {
 	void toList_armazenaOResultadoDoStreamEmUmaNovaLista_retornaNumerosPares_quandoSucesso() {
 
 		numeros = numeros.stream()
-				.filter(e -> e % 2 == 0)
-				.collect(Collectors.toList());
+							.filter(e -> e % 2 == 0)
+							.collect(Collectors.toList());
 		assertEquals(Arrays.asList(2, 2, 4, 6, 8, 10), numeros);
 	}
 
@@ -156,7 +176,7 @@ public class StreamTest {
 	void groupingBy_agrupaValoresPorUmDeterminadoCriterio_retornaUmaListaDeImparesEOutraListaDePares_quandoSucesso() {
 
 		Map<Boolean, List<Integer>> resultado = numeros.stream()
-				.collect(Collectors.groupingBy(e -> e % 2 == 0));
+														.collect(Collectors.groupingBy(e -> e % 2 == 0));
 
 		System.out.println(resultado);
 
@@ -168,11 +188,270 @@ public class StreamTest {
 	void joining_juncaoDeStringEmUmaUnicaString_retornaOsValoresConcatenadosSeparadosPorPontoEVirgula_quandoSucesso() {
 
 		String retorno = numeros.stream()
-				.map(e -> String.valueOf(e))
-				.collect(Collectors.joining(";"));
+								.map(e -> String.valueOf(e))
+								.collect(Collectors.joining(";"));
 
 		assertEquals("1;2;2;3;3;4;5;6;7;8;9;10", retorno);
 	}
+
+    @Test
+	void forEach_percorreOStream_flagEmailAniversarioEnviadoAlteradoParaTrue_quandoSucesso() {
+
+		EnviadorEmail enviadorEmail = new EnviadorEmail();
+
+		Cliente cliente1 = new Cliente.ClienteBuilder()
+							.comNome("Renato")
+							.comEmail("renato@email.com")
+							.comDataAniversario(LocalDate.now().minusYears(30))
+							.comEmailAniversarioEnviado(Boolean.FALSE)
+							.construir();
+
+		Cliente cliente2 = new Cliente.ClienteBuilder()
+							.comNome("Carla")
+							.comEmail("carla@email.com")
+							.comDataAniversario(LocalDate.now().minusYears(40))
+							.comEmailAniversarioEnviado(Boolean.FALSE)
+							.construir();
+
+		Cliente cliente3 = new Cliente.ClienteBuilder()
+							.comNome("Romário")
+							.comEmail("romario@email.com")
+							.comDataAniversario(LocalDate.now().minusYears(50))
+							.comEmailAniversarioEnviado(Boolean.FALSE)
+							.construir();
+
+		List <Cliente> clientes = new ArrayList<>();
+
+		clientes = Arrays.asList(cliente1, cliente2, cliente3);
+		
+		clientes.forEach(c -> {
+			enviadorEmail.enviar(c);
+			c.setEmailAniversarioEnviado(Boolean.TRUE);
+		});
+
+		clientes.forEach(c -> assertTrue(c.getEmailAniversarioEnviado()));
+
+	}
+ 
+	@Test
+	void reduce_soma_transformaEmUmElementoAtravesDeUmCriterio_retornaASomaDosValoresIgualA60_quandoSucesso() {
+
+		Optional<Integer> retorno = numeros.stream()
+										.reduce((n1, n2) -> n1 + n2);
+
+		assertEquals(60, retorno.get());
+	}
+ 
+	@Test
+	void reduce_multiplicacao_transformaEmUmElementoAtravesDeUmCriterio_retornaAMultiplicacaoDosValoresIgualA21772800_quandoSucesso() {
+
+		Optional<Integer> retorno = numeros.stream()
+										.reduce((n1, n2) -> n1 * n2);
+
+		assertEquals(21772800, retorno.get());
+	}
+
+	@Test
+	void reduce_concatenacao_transformaEmUmElementoAtravesDeUmCriterio_retornaAStringConcatenadaSemEspacos_quandoSucesso() {
+
+		String frase = "retorna a string concatenada sem espaços";
+		String[] fraseSplit = frase.split(" ");
+		List<String> listaString = Arrays.asList(fraseSplit);
+
+		System.out.println(frase);
+		System.out.println(fraseSplit);
+
+		Optional<String> retorno = listaString.stream()
+												.reduce((s1, s2) -> s1.concat(s2));
+
+		assertEquals("retornaastringconcatenadasemespaços", retorno.get());
+	}
+
+	@Test
+	void reduce_identidade_soma_transformaEmUmElementoAtravesDeUmCriterio_retorna0SomandoUmaListaVazia_quandoSucesso() {
+
+		numeros = new ArrayList<>();
+
+		Integer retorno = numeros.stream()
+									.reduce(0, (n1, n2) -> n1 + n2);
+
+		assertEquals(0, retorno);
+	}
+ 
+	@Test
+	void reduce_identidade_multiplicacao_transformaEmUmElementoAtravesDeUmCriterio_retornaZeroMultiplicandoUmaListaVazia_quandoSucesso() {
+
+		numeros = new ArrayList<>();
+
+		Integer retorno = numeros.stream()
+									.reduce(1, (n1, n2) -> n1 * n2);
+
+		assertEquals(1, retorno);
+	}
+
+	@Test
+	void reduce_identidade_concatenacao_transformaEmUmElementoAtravesDeUmCriterio_retornaVazioConcatenandoUmaStringVazia_quandoSucesso() {
+
+		String frase = "";
+		String[] fraseSplit = frase.split(" ");
+		List<String> listaString = Arrays.asList(fraseSplit);
+
+		System.out.println(frase);
+		System.out.println(fraseSplit);
+
+		String retorno = listaString.stream()
+										.reduce("", (s1, s2) -> s1.concat(s2));
+
+		assertEquals("", retorno);
+	}
+
+	@Test
+	void reduce_concatenacao_combinacao_transformaEmUmElementoAtravesDeUmCriterio_retornaAStringConcatenadaSemEspacos_quandoSucesso() {
+
+		String frase = "retorna a string concatenada sem espaços";
+		String[] fraseSplit = frase.split(" ");
+		List<String> listaString = Arrays.asList(fraseSplit);
+
+		System.out.println(frase);
+		System.out.println(fraseSplit);
+
+		String retorno = listaString.stream()
+										.reduce(
+											"", 
+											(s1, s2) -> s1.toString().concat(s2.toString()),
+											(s1, s2) -> s1.concat(s2)
+										);
+
+		assertEquals("retornaastringconcatenadasemespaços", retorno);
+	}
+
+ 	@Test
+	void collect_armazenaOResultadoEmUmaLista_quandoSucesso() {
+
+		Set<Integer> retorno = numeros.stream()
+										.collect(
+											() -> new HashSet<>(),
+											(lista, elemento) -> lista.add(elemento),
+											(lista1, lista2) -> lista1.addAll(lista2)
+										);
+										
+		assertEquals(("[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"), retorno.toString());
+
+	}
+
+	@Test
+	void collect_toList_retornaOResultadoEmUmaLista_quandoSucesso() {
+
+		List<Integer> retorno = numeros.stream()
+										.collect(Collectors.toList());
+										
+		assertEquals(Arrays.asList(1, 2, 2, 3, 3, 4, 5, 6, 7, 8, 9, 10), retorno);
+
+	}
+
+	@Test
+	void collect_toSet_retornaOResultadoEmUmSet_quandoSucesso() {
+
+		Set<Integer> retorno = numeros.stream()
+										.collect(Collectors.toSet());
+										
+		assertEquals(("[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"), retorno.toString());
+
+	}
+
+	@Test
+	void collect_toCollection_retornaUmaImplementacaoDaCollection_quandoSucesso() {
+
+		Deque<Integer> retorno = numeros.stream()
+										.collect(Collectors.toCollection(() -> new ArrayDeque<Integer>()));
+		
+		assertEquals("[1, 2, 2, 3, 3, 4, 5, 6, 7, 8, 9, 10]", retorno.toString());
+
+	}
+
+	@Test
+	void collect_joining_retornaOsElementosDeUmaListaEmUmaString_quandoSucesso() {
+
+		String retorno = numeros.stream()
+									.map( n -> n.toString())
+									.collect(Collectors.joining("-"));
+		
+		assertEquals("1-2-2-3-3-4-5-6-7-8-9-10", retorno);
+
+	}
+
+	/* 
+	- counting - contar o número de elementos
+	- maxBy - maior elemento obedecendo um critério
+	- minBy - menor elemento obedecendo um critério
+ */
+	@Test
+	void collect_counting_retornaAQuantidadeDeElementosDeUmaLista_quandoSucesso() {
+
+		Long retorno = numeros.stream()
+								.collect(Collectors.counting());
+		
+		assertEquals(12, retorno);
+
+	}
+
+	@Test
+	void collect_maxBy_retornaOMariorDeElementosDeUmaListaObedecendoUmCriterio_quandoSucesso() {
+
+		Optional<Integer> retorno = numeros.stream()
+								.collect(Collectors.maxBy(Comparator.naturalOrder()));
+		
+		assertEquals(10, retorno.get());
+
+	}
+
+	@Test
+	void collect_minBy_retornaOMenorDeElementosDeUmaListaObedecendoUmCriterio_quandoSucesso() {
+
+		Optional<Integer> retorno = numeros.stream()
+								.collect(Collectors.minBy(Comparator.naturalOrder()));
+		
+		assertEquals(1, retorno.get());
+
+	}
+ 
+	@Test
+	void averaging_retornaAMediaDeTodosOsValores_quandoSucesso() {
+
+		Double retorno = numeros.stream()
+									.collect(Collectors.averagingInt(n -> n.intValue()));
+
+		assertEquals(5.0, retorno);
+	}
+
+	@Test
+	void summing_retornaASomaDeTodosOsValores_quandoSucesso() {
+
+		Integer retorno = numeros.stream()
+									.collect(Collectors.summingInt(n -> n.intValue()));
+
+		assertEquals(60, retorno);
+	}
+
+	@Test
+	void summarizing_retornaUmaSumarizacaoDeTodosOsValores_quandoSucesso() {
+
+		IntSummaryStatistics retorno = numeros.stream()
+									.collect(Collectors.summarizingInt(n -> n.intValue()));
+		
+		assertAll("retorno", () -> assertEquals(5.0, retorno.getAverage()),
+									() -> assertEquals(12, retorno.getCount()),
+									() -> assertEquals(10, retorno.getMax()),
+									() -> assertEquals(1, retorno.getMin()),
+									() -> assertEquals(60, retorno.getSum())
+					);
+	}
+
+
+
+
+
+
 
 
 
