@@ -68,6 +68,11 @@ public class StreamTest {
 	- minBy - menor elemento obedecendo um critério
  */
 /* 
+	- groupingBy - agrupa valores em um map por um determinado critério
+	- partitioningBy - agrupa valores em um map por um determinado critério retornando sempre um bolean
+	- toMap - forma mais personalizada de se criar um map
+ */
+/* 
 	- averaging - retorna a média de todos os valores
 	- summing - retorna a soma de todos os valores
 	- summarizing - retorna uma sumarização de todos os valores
@@ -380,11 +385,6 @@ public class StreamTest {
 
 	}
 
-	/* 
-	- counting - contar o número de elementos
-	- maxBy - maior elemento obedecendo um critério
-	- minBy - menor elemento obedecendo um critério
- */
 	@Test
 	void collect_counting_retornaAQuantidadeDeElementosDeUmaLista_quandoSucesso() {
 
@@ -446,8 +446,44 @@ public class StreamTest {
 									() -> assertEquals(60, retorno.getSum())
 					);
 	}
+/* 
+	- groupingBy - agrupa valores em um map por um determinado critério
+	- partitioningBy - agrupa valores em um map por um determinado critério retornando sempre um bolean
+	- toMap - forma mais personalizada de se criar um map
+ */
+
+	@Test
+	void groupingBy_agrupaValoresPorUmDeterminadoCriterio_retornaTresListasDoRestoDaDivisaoPorTres_quandoSucesso() {
+
+		Map<Integer, List<Integer>> retorno = numeros.stream()
+														.collect(Collectors.groupingBy((n) -> n % 3 ));
+
+		assertEquals("[0=[3, 3, 6, 9], 1=[1, 4, 7, 10], 2=[2, 2, 5, 8]]", retorno.entrySet().toString());
+		
+	}
+
+	@Test
+	void partitioningBy_agrupaValoresPorUmDeterminadoCriterioRetornandoSempreBolean_retornaDuasListasDoRestoDaDivisaoPorTres_quandoSucesso() {
+
+		Map<Boolean, List<Integer>> retorno = numeros.stream()
+									.collect(Collectors.partitioningBy((n) -> n % 3 == 0 ));
+
+		assertEquals("[false=[1, 2, 2, 4, 5, 7, 8, 10], true=[3, 3, 6, 9]]", retorno.entrySet().toString());
 
 
+	}
+
+	@Test
+	void toMap_formaMaisPersonalizadaDeSeCriarUmMap_retornaUmMapCujoOValorEhODobroChave_quandoSucesso() {
+
+		Map<Integer, Integer> retorno = numeros.stream()
+									.distinct()
+									.collect(Collectors.toMap(n -> n, n -> n * 2));
+
+		assertEquals("[1=2, 2=4, 3=6, 4=8, 5=10, 6=12, 7=14, 8=16, 9=18, 10=20]", retorno.entrySet().toString());
+
+
+	}
 
 
 
