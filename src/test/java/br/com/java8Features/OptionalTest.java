@@ -7,7 +7,6 @@ import java.math.BigDecimal;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.expression.spel.ast.OpOr;
 
 import br.com.java8Features.model.Boleto;
 
