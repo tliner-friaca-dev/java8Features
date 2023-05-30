@@ -30,7 +30,7 @@ Este projeto trata-se da implementa&ccedil;&atilde;o de algumas Features do Java
 
 <p>&nbsp;</p>
 
-<h3><u>As Defini&ccedil;&atilde;o abaixo foram copiadas do <a href="https://www.oracle.com/java/technologies/javase/8-whats-new.html">site do Oracle</a></u></h3>
+<h3><u>As Defini&ccedil;&atilde;o abaixo foram copiadas do <a href="https://www.oracle.com/java/technologies/javase/8-whats-new.html" target="_blank">site do Oracle</a></u></h3>
 
 <br />
 <h4><strong><u>Api de Data e Hora:</u></strong></h4>
