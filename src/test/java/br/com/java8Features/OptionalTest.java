@@ -132,14 +132,14 @@ class OptionalTest {
 	public Optional<Integer> converteEmInteiro(BigDecimal valor) {
 		try {
 			Integer retorno = Integer.valueOf(valor.toString());
-			return Optional.of(retorno );
+			return Optional.of(retorno);
 		} catch (Exception e) {
 			return Optional.empty();
 		}
 	}
 
 	@Test
-	void orElseThrow_retornaUmExcecaoCasoOOptionalEstejaVazio_quandoSucesso() {
+	void orElseThrow_retornaUmaExcecaoCasoOOptionalEstejaVazio_quandoErro() {
 
 		Boleto boleto = new Boleto.BoletoBuilder()
 									.construir();
