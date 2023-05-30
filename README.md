@@ -42,8 +42,8 @@ Este projeto trata-se da implementa&ccedil;&atilde;o de algumas Features do Java
 <h4><u><strong>Lambda e Interface Funcional:</strong></u><br />
 &quot;Lambda Expressions, um novo recurso de linguagem, foi introduzido nesta vers&atilde;o. Eles permitem que voc&ecirc; trate a funcionalidade como um argumento de m&eacute;todo ou o c&oacute;digo como dados. As express&otilde;es lambda permitem expressar inst&acirc;ncias de interfaces de m&eacute;todo &uacute;nico (chamadas de interfaces funcionais) de forma mais compacta.&quot;</h4>
 
-<p><strong><u>Optional:</u></strong><br />
-&quot;Um objeto cont&ecirc;iner que pode ou n&atilde;o conter um valor n&atilde;o nulo. Se um valor estiver presente, isPresent()retornar&aacute; truee get()retornar&aacute; o valor.&quot;</p>
+<h4><p><strong><u>Optional:</u></strong><br />
+&quot;Um objeto cont&ecirc;iner que pode ou n&atilde;o conter um valor n&atilde;o nulo. Se um valor estiver presente, isPresent()retornar&aacute; truee get()retornar&aacute; o valor.&quot;</p><h4>
 
 <h4><u><strong>Refer&ecirc;ncia a M&eacute;todos:</strong></u><br />
 &quot;As refer&ecirc;ncias de m&eacute;todo fornecem express&otilde;es lambda f&aacute;ceis de ler para m&eacute;todos que j&aacute; t&ecirc;m um nome.&quot;</h4>
