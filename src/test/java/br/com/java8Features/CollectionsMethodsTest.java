@@ -94,7 +94,7 @@ class CollectionsMethodsTest {
 
 		map.forEach((k, v) -> System.out.println(String.valueOf(k) + " " + v));
 
-		assertEquals(mapCompute, map);
+		assertEquals(map, mapCompute);
 
 	}
 
@@ -103,7 +103,7 @@ class CollectionsMethodsTest {
 		
 		map.merge(2, " Merge", (v1, v2) -> v1 + v2);
 
-		assertEquals(mapMerge, map);
+		assertEquals(map, mapMerge);
 
 	}
 	
@@ -112,7 +112,7 @@ class CollectionsMethodsTest {
 		
 		map.replaceAll((k, v) -> v + " ReplaceAll");
 
-		assertEquals(mapReplaceAll, map);
+		assertEquals(map, mapReplaceAll);
 
 	}
 

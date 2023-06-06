@@ -27,16 +27,22 @@ class OptionalTest {
 	- orElseThrow
  */
 
+	/**
+	 *
+	 */
+	private static final int DEZ = 10;
+	private static final String CINQUENTA = "50";
+
 	@Test
 	void of_criandoUmOprional_quandoSucesso() {
 
 		Boleto boleto = new Boleto.BoletoBuilder()
-									.comValor(new BigDecimal("50"))
+									.comValor(new BigDecimal(CINQUENTA))
 									.construir();
 
 		Optional<String> valorDoBoleto = Optional.of(boleto.getValor().toString());
 
-		assertEquals("50", valorDoBoleto.get());
+		assertEquals(CINQUENTA, valorDoBoleto.get());
 
 	}
 
@@ -79,12 +85,12 @@ class OptionalTest {
 	void get_retornaOValorDentroDoOptional_quandoSucesso() {
 
 		Boleto boleto = new Boleto.BoletoBuilder()
-									.comValor(new BigDecimal("50"))
+									.comValor(new BigDecimal(CINQUENTA))
 									.construir();
 
 		Optional<String> valorDoBoleto = Optional.of(boleto.getValor().toString());
 
-		assertEquals("50", valorDoBoleto.get());
+		assertEquals(CINQUENTA, valorDoBoleto.get());
 
 
 	}
@@ -93,7 +99,7 @@ class OptionalTest {
 	void ifPresent_fazUmaOperacaoSeExistirUmValor_retornaOValorDoBoletoComDescontoDe10PorCento_quandoSucesso() {
 
 		Boleto boleto = new Boleto.BoletoBuilder()
-									.comValor(new BigDecimal("50"))
+									.comValor(new BigDecimal(CINQUENTA))
 									.construir();
 
 		Optional<String> valorDoBoleto = Optional.of(boleto.getValor().toString());
@@ -113,7 +119,7 @@ class OptionalTest {
 
 		Integer valor = converteEmInteiro(boleto.getValor()).orElse(10);
 
-		assertEquals(10, valor);
+		assertEquals(DEZ, valor);
 
 	}
 	
@@ -125,7 +131,7 @@ class OptionalTest {
 
 		Integer valor = converteEmInteiro(boleto.getValor()).orElseGet(() -> 5 * 2);
 
-		assertEquals(10, valor);
+		assertEquals(DEZ, valor);
 
 	}
 

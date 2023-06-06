@@ -82,7 +82,7 @@ class ApiDataEHoraTest {
 		
 		LocalDate localDateFixo = LocalDate.of(2023, Month.MAY, 3);
 
-		assertEquals(localDateFixo.isBefore(localDateNow), Boolean.TRUE);
+		assertEquals(Boolean.TRUE, localDateFixo.isBefore(localDateNow));
 
 	}
 	
@@ -94,7 +94,7 @@ class ApiDataEHoraTest {
 		System.out.println(localTimeNow);
 		LocalTime localTimeFixo = LocalTime.of(16,47, 22,896);
 		
-		assertEquals(localTimeFixo.isBefore(localTimeNow), Boolean.TRUE);
+		assertEquals(Boolean.TRUE, localTimeFixo.isBefore(localTimeNow));
 
 	}
 	
@@ -106,7 +106,7 @@ class ApiDataEHoraTest {
 
 		LocalDateTime localDateTimeFixo = LocalDateTime.of(2023, Month.MAY, 3, 16, 47, 22, 896);
 		
-		assertEquals(localDateTimeFixo.isBefore(localDateTimeNow), Boolean.TRUE);
+		assertEquals(Boolean.TRUE, localDateTimeFixo.isBefore(localDateTimeNow));
 
 	}
 
@@ -119,7 +119,7 @@ class ApiDataEHoraTest {
 		Instant instantFixo = Instant.ofEpochMilli(989879876546L);
 		System.out.println(instantFixo);
 		
-		assertEquals(instantFixo.isBefore(instantNow), Boolean.TRUE);
+		assertEquals(Boolean.TRUE, instantFixo.isBefore(instantNow));
 
 	}
 
@@ -131,7 +131,7 @@ class ApiDataEHoraTest {
 
 		ZonedDateTime zonedDateTimeFixo = ZonedDateTime.of(2023, 5, 3, 16, 47, 22, 896, ZoneId.of("America/Sao_Paulo"));
 
-		assertEquals(zonedDateTimeFixo.isBefore(zonedDateTimeNow), Boolean.TRUE);
+		assertEquals(Boolean.TRUE, zonedDateTimeFixo.isBefore(zonedDateTimeNow));
 
 	}
 
@@ -144,7 +144,7 @@ class ApiDataEHoraTest {
 		LocalDate localDateFixo = LocalDate.of(2023, Month.MAY, 3);
 		localDateFixo = localDateFixo.plusYears(100).plusMonths(50).minusDays(20);
 
-		assertEquals(localDateFixo.isBefore(localDateNow), Boolean.FALSE);
+		assertEquals(Boolean.FALSE, localDateFixo.isBefore(localDateNow));
 
 	}
 
@@ -171,7 +171,7 @@ class ApiDataEHoraTest {
 
 		System.out.println(period);
 
-		assertEquals(period.toString(), "P1Y1M1D");
+		assertEquals("P1Y1M1D", period.toString());
 
 	}
 		
@@ -183,7 +183,7 @@ class ApiDataEHoraTest {
 
 		System.out.println(Period.between(localDateUm, localDateDois));
 
-		assertEquals(Period.between(localDateUm, localDateDois), Period.of(1,1,1));
+		assertEquals(Period.of(1,1,1), Period.between(localDateUm, localDateDois));
 
 	}
 	
@@ -196,7 +196,7 @@ class ApiDataEHoraTest {
 
 		System.out.println(period);
 
-		assertEquals(period, Period.of(2,2,2));
+		assertEquals(Period.of(2,2,2), period);
 
 	}
 
@@ -209,7 +209,7 @@ class ApiDataEHoraTest {
 
 		System.out.println(duration);
 
-		assertEquals(duration.toString(), "PT24H");
+		assertEquals("PT24H", duration.toString());
 
 	}
 		
@@ -221,7 +221,7 @@ class ApiDataEHoraTest {
 
 		System.out.println(Duration.between(LocalTimeUm, LocalTimeDois));
 
-		assertEquals(Duration.between(LocalTimeUm, LocalTimeDois).toString(), "PT1H1M1S");
+		assertEquals("PT1H1M1S", Duration.between(LocalTimeUm, LocalTimeDois).toString());
 
 	}
 	
@@ -234,7 +234,7 @@ class ApiDataEHoraTest {
 
 		System.out.println(duration);
 
-		assertEquals(duration, Duration.ofHours(11));
+		assertEquals(Duration.ofHours(11), duration);
 
 	}
 
@@ -251,7 +251,7 @@ class ApiDataEHoraTest {
 
 		System.out.println(formatado);
 		
-		assertEquals(formatado, "2023-05-03");
+		assertEquals("2023-05-03", formatado);
 
 	}
 	
@@ -266,7 +266,7 @@ class ApiDataEHoraTest {
 
 		System.out.println(formatado);
 		
-		assertEquals(formatado, "16:47:22.000000896");
+		assertEquals("16:47:22.000000896", formatado);
 
 	}
 
@@ -281,7 +281,7 @@ class ApiDataEHoraTest {
 
 		System.out.println(formatado);
 		
-		assertEquals(formatado, "03/05/2023");
+		assertEquals("03/05/2023", formatado);
 
 	}
 	
@@ -296,7 +296,7 @@ class ApiDataEHoraTest {
 
 		System.out.println(formatado);
 		
-		assertEquals(formatado, "16:47:22");
+		assertEquals("16:47:22", formatado);
 
 	}
 
@@ -311,7 +311,7 @@ class ApiDataEHoraTest {
 
 		System.out.println(formatado);
 		
-		assertEquals(formatado, "03/05/2023 16:47:22");
+		assertEquals("03/05/2023 16:47:22", formatado);
 
 	}
 
@@ -326,7 +326,7 @@ class ApiDataEHoraTest {
 
 		System.out.println(formatado);
 		
-		assertEquals(formatado, "03-05-2023");
+		assertEquals("03-05-2023", formatado);
 
 	}
 
@@ -341,7 +341,7 @@ class ApiDataEHoraTest {
 
 		System.out.println(formatado);
 		
-		assertEquals(formatado, "03-05-2023 16:47:22");
+		assertEquals("03-05-2023 16:47:22", formatado);
 
 	}
 
@@ -356,7 +356,7 @@ class ApiDataEHoraTest {
 
 		System.out.println(localDateTime);
 		
-		assertEquals(localDateTime, LocalDateTime.of(2023, Month.MAY, 3, 16, 47, 22));
+		assertEquals(LocalDateTime.of(2023, Month.MAY, 3, 16, 47, 22), localDateTime);
 
 	}
 

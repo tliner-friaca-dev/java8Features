@@ -470,7 +470,6 @@ public class StreamTest {
 
 		assertEquals("[false=[1, 2, 2, 4, 5, 7, 8, 10], true=[3, 3, 6, 9]]", retorno.entrySet().toString());
 
-
 	}
 
 	@Test
@@ -482,17 +481,6 @@ public class StreamTest {
 
 		assertEquals("[1=2, 2=4, 3=6, 4=8, 5=10, 6=12, 7=14, 8=16, 9=18, 10=20]", retorno.entrySet().toString());
 
-
 	}
-
-
-
-
-
-
-
-
-
-
 
 }
