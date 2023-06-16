@@ -61,11 +61,6 @@ class ApiDataEHoraTest {
 
 */	
 
-	@BeforeEach
-	public void setUp() {
-		
-
-	}
 /* 
 	- LocalDate - representa uma data: 03/05/2023
 	- LocalTime - representa uma hora: 16:47:22
