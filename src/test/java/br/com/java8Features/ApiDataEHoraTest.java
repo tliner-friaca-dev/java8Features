@@ -18,7 +18,6 @@ import java.time.format.FormatStyle;
 import java.time.temporal.TemporalAccessor;
 import java.util.Optional;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ApiDataEHoraTest {
@@ -87,7 +86,8 @@ class ApiDataEHoraTest {
 		LocalTime localTimeNow = LocalTime.now();
 
 		System.out.println(localTimeNow);
-		LocalTime localTimeFixo = LocalTime.of(16,47, 22,896);
+
+		LocalTime localTimeFixo = localTimeNow.minusHours(1);
 		
 		assertEquals(Boolean.TRUE, localTimeFixo.isBefore(localTimeNow));
 
